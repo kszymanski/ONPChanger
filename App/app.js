@@ -7,6 +7,9 @@ app.config(["$routeProvider", "$locationProvider" , function ($routeProvider, $l
 		})
 		.when("/about",{
 			templateUrl: "/views/about.html"
-		});
+		}).when("/notations",{
+			templateUrl: "/views/notations.html"
+		})
+		.otherwise("/");
 	$locationProvider.html5Mode(true);
 }]);

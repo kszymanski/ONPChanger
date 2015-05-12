@@ -1,4 +1,4 @@
-var app = angular.module("ONPChanger", ["ngRoute"]);
+var app = angular.module("ONPChanger", ["ngRoute", "ui.bootstrap"]);
 app.config(["$routeProvider", "$locationProvider" , function ($routeProvider, $locationProvider){
 	$routeProvider
 		.when("/", {
@@ -8,7 +8,8 @@ app.config(["$routeProvider", "$locationProvider" , function ($routeProvider, $l
 		.when("/about",{
 			templateUrl: "/views/about.html"
 		}).when("/notations",{
-			templateUrl: "/views/notations.html"
+			templateUrl: "/views/notations.html",
+            controller: "notationController"
 		})
 		.otherwise("/");
 	$locationProvider.html5Mode(true);

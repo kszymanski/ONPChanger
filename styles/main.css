@@ -4,3 +4,4 @@ body {
 #menu-icon{
 	height: 100%;
 }
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

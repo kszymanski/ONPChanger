@@ -2,42 +2,54 @@
 <html>
 
 <head>
-	<base href="/"/>
-	<meta charset="UTF-8">
-	<title>ONPChanger</title>
-	<link rel="stylesheet" href="libs/bootstrap-3.3.4/css/bootstrap.css">
-	<link rel="stylesheet" href="libs/bootstrap-3.3.4/css/bootstrap-theme.css">
-	<link rel="stylesheet" href="styles/main.css">
-	<link rel="shortcut icon" href="/assets/purple-elephant-md.ico" />
+    <base href="/" />
+    <meta charset="UTF-8">
+    <title>ONPChanger</title>
+    <link rel="stylesheet" href="libs/bootstrap-3.3.4/css/bootstrap.css">
+    <link rel="stylesheet" href="libs/bootstrap-3.3.4/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="shortcut icon" href="/assets/purple-elephant-md.ico" />
 </head>
 
 <body ng-app="ONPChanger">
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="/">
-					<img alt="Brand" id="menu-icon" src="assets/purple-elephant-md.ico">
-				</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li class=""><a href="/notations">O Notacjach <span class="sr-only">(current)</span></a>
-				</li>
-				<li><a href="/about">O Nas</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
-	<div class="container" ng-view>
-		
-	</div>
-	<!-- Libs -->
-	<script src="libs/jquery-2.1.4.js"></script>
-	<script src="libs/bootstrap-3.3.4/js/bootstrap.js"></script>
-	<script src="libs/angular-1.4.0-rc.1/angular.js"></script>
-	<script src="libs/angular-1.4.0-rc.1/angular-route.js"></script>
-	<!-- App -->
-	<script src="App/app.js"></script>
-	<script src="App/homeController.js"></script>
+    <nav class="navbar navbar-default navbar-fixed-top" nav-controller>
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" ng-click="isCollapsed = !isCollapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <span><img alt="Brand" id="menu-icon" src="assets/purple-elephant-md.ico"></span> <span>Konwerter</span>
+                    </a>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse" collapse="!isCollapsed">
+                <ul class="nav navbar-nav" >
+                    <li><a href="/notations">O Notacjach</a>
+                    </li>
+                    <li><a href="/about">O Nas</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" ng-view>
+
+    </div>
+    <!-- Libs -->
+    <script src="libs/jquery-2.1.4.js"></script>
+    <script src="libs/bootstrap-3.3.4/js/bootstrap.js"></script>
+    <script src="libs/angular-1.4.0-rc.1/angular.js"></script>
+    <script src="libs/ui-bootstrap-tpls-0.13.0.js"></script>
+    <script src="libs/angular-1.4.0-rc.1/angular-route.js"></script>
+    <!-- App -->
+    <script src="App/app.js"></script>
+    <script src="App/homeController.js"></script>
+    <script src="App/notationsController.js"></script>
 </body>
 
 </html>

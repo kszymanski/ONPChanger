@@ -69,9 +69,11 @@ app.service("notationConverter", function () {
 			}
 
 		}
+		// put rest of operators into the output
 		for (var k = 0, length = stack.length; k < length; k++) {
 			output.push(stack.pop());
 		}
+		// make result string from output stack
 		var result = "";
 		for (var k = 0, length = output.length; k < length; k++) {
 			result += " " + output[k];

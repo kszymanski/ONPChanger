@@ -1,4 +1,4 @@
-var app = angular.module("ONPChanger", ["ngRoute", "ui.bootstrap"]);
+var app = angular.module("ONPChanger", ["ngRoute", "ngMessages", "ui.bootstrap"]);
 app.config(["$routeProvider", "$locationProvider" , function ($routeProvider, $locationProvider){
 	$routeProvider
 		.when("/", {

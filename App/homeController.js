@@ -48,7 +48,7 @@ app.controller("homeController", ["$scope", function ($scope) {
 				alreadySelected();
 				break;
 			case 2:
-				console.log("post");
+				displayResult(postToIn($scope.expression), 'success');
 				break;
 			}
 		}
@@ -63,6 +63,47 @@ app.controller("homeController", ["$scope", function ($scope) {
 		$scope.solution.result = status;
 		$scope.solution.display = true;
 	}
+	
+	
+	
+	
+	
+	var postToIn = function (expression) {
+		var reStr = expression;
+		var stack = [];
+		
+		for (var k = 0, length = reStr.length; k < length; k++) {
+			var c = reStr[k];
+			if(c == ' '){
+				continue;
+			}
+			if($.inArray(c, operands) == -1){
+				i = 1;
+				while(($.inArray(reStr[k+i],operands) === -1 && reStr[k+i] != ' ') && k+i < length){
+					c += reStr[k+i];
+					i++;
+				}
+				k= k+i -1;
+				stack.push(c);
+				
+			}else{
+				if(stack.length < 2){
+					throw "lipa";
+				}
+				var b = stack.pop();
+				var a = stack.pop();
+				stack.push('(' + a + ' ' + c + ' ' + b + ')')
+			}
+		}
+		if(stack.length > 1){
+			throw "to much";
+		}
+		return stack.pop();
+	}
+	
+	
+	
+	
 	var inToPre = function(expression){
 		var reStr = expression;
 		reStr = reStr.split('').reverse().join('');

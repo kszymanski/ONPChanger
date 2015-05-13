@@ -13,7 +13,7 @@ app.controller("homeController", ["$scope", function ($scope) {
 				alreadySelected();
 				break;
 			case 1:
-				console.log("in");
+				inToPre();
 				break;
 			case 2:
 				console.log("post");
@@ -63,7 +63,34 @@ app.controller("homeController", ["$scope", function ($scope) {
 		$scope.solution.result = status;
 		$scope.solution.display = true;
 	}
-
+	var inToPre = function(){
+		var reStr = $scope.expression;
+		var stack = [];
+		var output = [];
+		
+		for (var k = 0, length = reStr.length; k < length; k++) {
+			var c = reStr[k];
+			// skip whitespaces
+			if (c == " ") {
+				continue;
+			}
+			// operands algoritm
+			if ($.inArray(c, operands) !== -1) { // if c is one of operands
+				output.push(c);
+				continue;
+			}else{
+				if(stack.length == 0){
+					stack.push(c);
+					continue;
+				}else{
+					output.push(stack.pop());
+					stack.push(c);
+				}
+			}
+		}
+		console.log(output);
+		console.log(stack);
+	}
 
 	var inToPost = function () {
 		var reStr = $scope.expression;
@@ -74,7 +101,6 @@ app.controller("homeController", ["$scope", function ($scope) {
 			var c = reStr[k];
 			// skip whitespaces
 			if (c == " ") {
-				console.log('whitespace');
 				continue;
 			}
 			// operands algoritm
@@ -110,6 +136,12 @@ app.controller("homeController", ["$scope", function ($scope) {
 					stack.push(c);
 				}
 			} else {
+				i = 1;
+				while($.inArray(reStr[k+i],operands) === -1 && k+i < length){
+					c += reStr[k+i];
+					i++;
+				}
+				k= k+i -1;
 				output.push(c);
 			}
 
@@ -119,7 +151,7 @@ app.controller("homeController", ["$scope", function ($scope) {
 		}
 		var msg = "";
 		for (var k = 0, length = output.length; k < length; k++) {
-			msg += output[k];
+			msg += " " + output[k];
 		}
 		displayResult(msg, 'success');
 	}

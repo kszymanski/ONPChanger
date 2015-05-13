@@ -16,7 +16,7 @@ app.controller("homeController", ["$scope", function ($scope) {
 				displayResult(inToPre($scope.expression), 'success');
 				break;
 			case 2:
-				console.log("post");
+				displayResult(inToPre(postToIn($scope.expression)), 'success');
 				break;
 			}
 		}
@@ -26,7 +26,7 @@ app.controller("homeController", ["$scope", function ($scope) {
 		if ($scope.expressionForm.$valid) {
 			switch ($scope.radioModel) {
 			case 0:
-				console.log("pre");
+				displayResult(inToPost(preToIn($scope.expression)), 'success');
 				break;
 			case 1:
 				displayResult(inToPost($scope.expression), 'success');

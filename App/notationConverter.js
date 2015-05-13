@@ -57,11 +57,13 @@ app.service("notationConverter", function () {
 			}
 			// opperands algorithm
 			else {
+				// logic for operands that are number grater than 9
 				i = 1;
 				while ($.inArray(reStr[k + i], operators) === -1 && k + i < length) {
 					c += reStr[k + i];
 					i++;
 				}
+				// change k index in for loop regarding upper while
 				k = k + i - 1;
 				output.push(c);
 			}

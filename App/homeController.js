@@ -29,7 +29,7 @@ app.controller("homeController", ["$scope", function ($scope) {
 				console.log("pre");
 				break;
 			case 1:
-				displayResult(inToPost($scope.expression),'success');
+				displayResult(inToPost($scope.expression), 'success');
 				break;
 			case 2:
 				alreadySelected();
@@ -42,7 +42,7 @@ app.controller("homeController", ["$scope", function ($scope) {
 		if ($scope.expressionForm.$valid) {
 			switch ($scope.radioModel) {
 			case 0:
-				console.log("pre");
+				displayResult(preToIn($scope.expression), 'success');
 				break;
 			case 1:
 				alreadySelected();
@@ -55,7 +55,7 @@ app.controller("homeController", ["$scope", function ($scope) {
 	};
 
 	var alreadySelected = function () {
-		displayResult("Zaznaczyłeś te samą postać a wiec wynik jest ten sam","info");
+		displayResult("Zaznaczyłeś te samą postać a wiec wynik jest ten sam", "info");
 	}
 
 	var displayResult = function (msg, status) {
@@ -63,31 +63,40 @@ app.controller("homeController", ["$scope", function ($scope) {
 		$scope.solution.result = status;
 		$scope.solution.display = true;
 	}
-	
-	
-	
-	
-	
+
+
+	var preToIn = function (expression) {
+		var reStr = expression;
+		reStr = reStr.split('').reverse().join('');
+		reStr = postToIn(reStr);
+		reStr = reStr.split('').reverse().join('');
+		reStr = reStr.replace(/[)]/g, '#');
+		reStr = reStr.replace(/[(]/g, ')');
+		reStr = reStr.replace(/[#]/g, '(');
+		return reStr;
+	}
+
+
 	var postToIn = function (expression) {
 		var reStr = expression;
 		var stack = [];
-		
+
 		for (var k = 0, length = reStr.length; k < length; k++) {
 			var c = reStr[k];
-			if(c == ' '){
+			if (c == ' ') {
 				continue;
 			}
-			if($.inArray(c, operands) == -1){
+			if ($.inArray(c, operands) == -1) {
 				i = 1;
-				while(($.inArray(reStr[k+i],operands) === -1 && reStr[k+i] != ' ') && k+i < length){
-					c += reStr[k+i];
+				while (($.inArray(reStr[k + i], operands) === -1 && reStr[k + i] != ' ') && k + i < length) {
+					c += reStr[k + i];
 					i++;
 				}
-				k= k+i -1;
+				k = k + i - 1;
 				stack.push(c);
-				
-			}else{
-				if(stack.length < 2){
+
+			} else {
+				if (stack.length < 2) {
 					throw "lipa";
 				}
 				var b = stack.pop();
@@ -95,25 +104,25 @@ app.controller("homeController", ["$scope", function ($scope) {
 				stack.push('(' + a + ' ' + c + ' ' + b + ')')
 			}
 		}
-		if(stack.length > 1){
+		if (stack.length > 1) {
 			throw "to much";
 		}
 		return stack.pop();
 	}
-	
-	
-	
-	
-	var inToPre = function(expression){
+
+
+
+
+	var inToPre = function (expression) {
 		var reStr = expression;
 		reStr = reStr.split('').reverse().join('');
-		reStr = reStr.replace('(', '#');
-		reStr = reStr.replace(')', '(');
-		reStr = reStr.replace('#', ')');
-		
+		reStr = reStr.replace(/[)]/g, '#');
+		reStr = reStr.replace(/[(]/g, ')');
+		reStr = reStr.replace(/[#]/g, '(');
+
 		var result = inToPost(reStr);
 		result = result.split('').reverse().join('');
-		
+
 		return result;
 	}
 
@@ -162,11 +171,11 @@ app.controller("homeController", ["$scope", function ($scope) {
 				}
 			} else {
 				i = 1;
-				while($.inArray(reStr[k+i],operands) === -1 && k+i < length){
-					c += reStr[k+i];
+				while ($.inArray(reStr[k + i], operands) === -1 && k + i < length) {
+					c += reStr[k + i];
 					i++;
 				}
-				k= k+i -1;
+				k = k + i - 1;
 				output.push(c);
 			}
 

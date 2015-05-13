@@ -13,7 +13,7 @@ app.controller("homeController", ["$scope", function ($scope) {
 				alreadySelected();
 				break;
 			case 1:
-				inToPre();
+				displayResult(inToPre($scope.expression), 'success');
 				break;
 			case 2:
 				console.log("post");
@@ -29,7 +29,7 @@ app.controller("homeController", ["$scope", function ($scope) {
 				console.log("pre");
 				break;
 			case 1:
-				inToPost();
+				displayResult(inToPost($scope.expression),'success');
 				break;
 			case 2:
 				alreadySelected();
@@ -63,37 +63,21 @@ app.controller("homeController", ["$scope", function ($scope) {
 		$scope.solution.result = status;
 		$scope.solution.display = true;
 	}
-	var inToPre = function(){
-		var reStr = $scope.expression;
-		var stack = [];
-		var output = [];
+	var inToPre = function(expression){
+		var reStr = expression;
+		reStr = reStr.split('').reverse().join('');
+		reStr = reStr.replace('(', '#');
+		reStr = reStr.replace(')', '(');
+		reStr = reStr.replace('#', ')');
 		
-		for (var k = 0, length = reStr.length; k < length; k++) {
-			var c = reStr[k];
-			// skip whitespaces
-			if (c == " ") {
-				continue;
-			}
-			// operands algoritm
-			if ($.inArray(c, operands) !== -1) { // if c is one of operands
-				output.push(c);
-				continue;
-			}else{
-				if(stack.length == 0){
-					stack.push(c);
-					continue;
-				}else{
-					output.push(stack.pop());
-					stack.push(c);
-				}
-			}
-		}
-		console.log(output);
-		console.log(stack);
+		var result = inToPost(reStr);
+		result = result.split('').reverse().join('');
+		
+		return result;
 	}
 
-	var inToPost = function () {
-		var reStr = $scope.expression;
+	var inToPost = function (expression) {
+		var reStr = expression;
 		var stack = [];
 		var output = [];
 		for (var k = 0, length = reStr.length; k < length; k++) {
@@ -149,11 +133,11 @@ app.controller("homeController", ["$scope", function ($scope) {
 		for (var k = 0, length = stack.length; k < length; k++) {
 			output.push(stack.pop());
 		}
-		var msg = "";
+		var result = "";
 		for (var k = 0, length = output.length; k < length; k++) {
-			msg += " " + output[k];
+			result += " " + output[k];
 		}
-		displayResult(msg, 'success');
+		return result;
 	}
 
 	var operands = ['(', ')', '+', '-', '/', '*', '^'];

@@ -1,4 +1,4 @@
-<alert class="text-center" type="{{solution.result}}" ng-show="solution.display">{{solution.expression}}</alert>
+<div uib-alert class="text-center" ng-class="'alert-' + (solution.result || 'warning')" ng-show="solution.display">{{solution.expression}}</div>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h4>Konwerter</h4>
@@ -18,9 +18,9 @@
 			<div class="form-group">
 				<label for="typeControl" class="control-label col-lg-2">2. Zaznacz postać: </label>
 				<div class="btn-group col-lg-4" id="typeControl">
-					<label class="btn btn-primary" ng-model="radioModel" btn-radio="0">Prefiksowa</label>
-					<label class="btn btn-primary" ng-model="radioModel" btn-radio="1">Infiksowa</label>
-					<label class="btn btn-primary" ng-model="radioModel" btn-radio="2">Postfixsowa</label>
+					<label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="0">Prefiksowa</label>
+					<label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="1">Infiksowa</label>
+					<label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="2">Postfixsowa</label>
 				</div>
 			</div>
 			<div class="form-group">

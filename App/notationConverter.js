@@ -1,7 +1,7 @@
-app.service("notationConverter", function () {
-	operators = ['(', ')', '+', '-', '/', '*', '^'];
+export function notationConverter() {
+	var operators = ['(', ')', '+', '-', '/', '*', '^'];
 
-	operatorsStrength = {
+	var operatorsStrength = {
 		'(': 0,
 		')': 0,
 		'+': 1,
@@ -58,7 +58,7 @@ app.service("notationConverter", function () {
 			// opperands algorithm
 			else {
 				// logic for operands that are number grater than 9
-				i = 1;
+				var i = 1;
 				while ($.inArray(reStr[k + i], operators) === -1 && k + i < length) {
 					c += reStr[k + i];
 					i++;
@@ -111,7 +111,7 @@ app.service("notationConverter", function () {
 			}
 			//char is operand
 			if ($.inArray(c, operators) == -1) {
-				i = 1;
+				var i = 1;
 				// Put togeather all chars for number greater than 9
 				while (($.inArray(reStr[k + i], operators) === -1 && reStr[k + i] != ' ') && k + i < length) {
 					c += reStr[k + i];
@@ -169,4 +169,4 @@ app.service("notationConverter", function () {
 		return this.InfixToPostfix(this.PrefixToInfix(expression));
 	};
 
-});
+};

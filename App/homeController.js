@@ -1,4 +1,4 @@
-app.controller("homeController", ["$scope", "notationConverter", function ($scope, notationConverter) {
+export function homeController($scope, notationConverter) {
 	$scope.radioModel = 2;
 	$scope.solution = {
 		expression: "",
@@ -64,4 +64,4 @@ app.controller("homeController", ["$scope", "notationConverter", function ($scop
 		$scope.solution.display = true;
 	}
 
-}]);
+};
